@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[Project Name] — The Villas</title>
+<meta name="description" content="Architect-designed luxury villas — the concept, the spaces, and the design elements that define them.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF3F8; --ink:#0F1E2E; --ink2:#2B3D52; --muted:#4A5B6E; --label:#2C4560;
+  --accent:#2459C8; --accent-ink:#FFFFFF; --accent-soft:rgba(36,89,200,.12);
+  --glass:rgba(255,255,255,.55); --glass-strong:rgba(255,255,255,.75); --glass-line:rgba(255,255,255,.85);
+  --hair:rgba(15,30,46,.1);
+  --shadow:0 20px 60px rgba(30,60,110,.12), inset 0 1px 0 rgba(255,255,255,.95);
+  --serif:'Instrument Serif', Georgia, serif; --sans:'Inter', system-ui, -apple-system, sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{margin:0;position:relative;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:var(--accent)} a:hover{color:#163F94}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+
+.orbs{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.orb{position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0}
+main,header,footer{position:relative;z-index:1}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+.wide{max-width:1320px;margin:0 auto;padding:0 24px}
+.section{padding-bottom:140px}
+@media (max-width:640px){.section{padding-bottom:96px}.concept{padding-top:96px}.res-img,.step-img,.plan{min-height:340px}.hl-detail .ph{min-height:260px}.swatches{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+.glass{background:var(--glass);backdrop-filter:blur(28px) saturate(180%);-webkit-backdrop-filter:blur(28px) saturate(180%);border:1px solid var(--glass-line);box-shadow:var(--shadow)}
+.eyebrow{font-size:13px;letter-spacing:.2em;color:var(--accent);font-weight:500;text-transform:uppercase}
+h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;letter-spacing:-.005em}
+h2{font-size:clamp(38px,4.6vw,62px);line-height:1.1}
+h3{font-size:clamp(28px,2.6vw,36px);line-height:1.15}
+p{margin:0}
+.lead{color:var(--ink2);font-size:18px;max-width:560px}
+.muted{color:var(--muted)}
+.ph{display:flex;align-items:flex-end;padding:18px;border-radius:32px;position:relative;overflow:hidden}
+.ph span.tag{font-size:11px;letter-spacing:.22em;color:var(--label);background:rgba(255,255,255,.5);padding:5px 10px;border-radius:999px;text-transform:uppercase}
+.lift{transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s}
+.lift:hover{transform:translateY(-4px);box-shadow:0 22px 50px rgba(30,60,110,.16),inset 0 1px 0 rgba(255,255,255,.95)}
+
+/* buttons & pills */
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 28px;border-radius:999px;text-decoration:none;font-weight:500;border:0;transition:transform .2s,box-shadow .2s}
+.btn-primary{background:var(--accent);color:var(--accent-ink);box-shadow:0 8px 24px rgba(36,89,200,.3)}
+.btn-primary:hover{color:#fff;transform:translateY(-1px)}
+.btn-glass{background:rgba(255,255,255,.7);color:var(--ink);border:1px solid rgba(255,255,255,.9)}
+.btn-glass:hover{color:var(--ink)}
+.seg{display:inline-flex;flex-wrap:wrap;gap:6px;padding:6px;border-radius:999px}
+.pill{min-height:42px;padding:0 18px;border-radius:999px;border:0;background:transparent;color:var(--ink);font-size:14px;font-weight:500;transition:background .25s,color .25s,box-shadow .25s}
+.pill:hover{background:rgba(255,255,255,.7)}
+.pill[aria-pressed="true"],.pill[aria-selected="true"]{background:var(--accent);color:#fff;box-shadow:0 6px 18px rgba(36,89,200,.25)}
+
+/* header */
+.nav{position:sticky;top:0;z-index:30;padding:16px 16px 0}
+.nav-in{max-width:1240px;margin:0 auto;padding:10px 10px 10px 24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 24px;border-radius:999px}
+.brand{text-decoration:none;color:var(--ink);display:flex;align-items:baseline;gap:10px}
+.brand b{font-family:var(--serif);font-weight:400;font-size:26px}
+.brand small{font-size:11px;letter-spacing:.24em;color:var(--muted)}
+.links{display:flex;flex-wrap:wrap;gap:2px}
+.links a{color:var(--ink);text-decoration:none;padding:8px 14px;border-radius:999px;font-size:14px;transition:background .2s}
+.links a:hover{background:rgba(255,255,255,.75);color:var(--ink)}
+@media (max-width:900px){.links{display:none}.nav-in{border-radius:28px}}
+
+/* hero */
+.hero{position:relative;min-height:760px;border-radius:40px;overflow:hidden;display:flex;align-items:flex-end;margin-top:32px;box-shadow:0 30px 80px rgba(30,60,110,.18);background:#A9C1D8}
+.hero .ph-label{position:absolute;top:24px;right:24px}
+.hero-card{position:relative;margin:24px;padding:40px;max-width:640px;display:flex;flex-direction:column;gap:22px;border-radius:32px;background:rgba(255,255,255,.42)}
+.hero h1{font-size:clamp(44px,6vw,88px);line-height:1.06}
+.hero h1 em{color:var(--accent)}
+.chip{align-self:flex-start;font-size:12px;letter-spacing:.18em;background:rgba(255,255,255,.65);padding:6px 14px;border-radius:999px}
+@media (max-width:640px){.hero{min-height:640px;border-radius:28px}.hero-card{margin:64px 12px 12px;padding:24px}.hero .ph-label{display:none}.hero-card{margin-top:12px!important}}
+
+/* concept */
+.concept{display:flex;flex-wrap:wrap;gap:56px;align-items:center;padding-top:140px}
+.concept>div{flex:1 1 460px}
+.principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:48px}
+.principle{padding:28px;border-radius:28px;display:flex;flex-direction:column;gap:12px}
+.icon{display:inline-flex;width:52px;height:52px;align-items:center;justify-content:center;border-radius:16px;background:var(--accent-soft);color:var(--accent)}
+.principle h4{margin:0;font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.15}
+.principle p{font-size:14px;color:var(--muted)}
+
+/* residences */
+.res-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:36px}
+.res{display:flex;flex-wrap:wrap;gap:24px}
+.res-img{flex:999 1 580px;min-width:0;min-height:560px;flex-direction:column;justify-content:space-between;align-items:stretch;transition:background .4s}
+.res-img .top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;min-height:32px}
+.badge{display:inline-block;font-size:12px;font-weight:500;color:#fff;background:var(--accent);padding:6px 14px;border-radius:999px}
+.res-card{flex:1 1 360px;padding:36px;border-radius:36px;display:flex;flex-direction:column;gap:20px}
+.specs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0}
+.specs div{padding:14px 16px;background:rgba(255,255,255,.7);border-radius:18px}
+.specs dt{font-size:12px;color:var(--muted)} .specs dd{margin:0;font-weight:500}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tags span{font-size:13px;padding:6px 12px;border-radius:999px;border:1px solid rgba(15,30,46,.14);color:var(--ink2)}
+.fade{animation:fade .45s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* journey */
+.journey{padding:40px;border-radius:40px}
+.steps{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin:28px 0 28px;scrollbar-width:thin}
+.step-btn{flex:0 0 auto;display:flex;align-items:center;gap:10px;min-height:48px;padding:0 18px 0 8px;border-radius:999px;border:1px solid rgba(255,255,255,.95);background:rgba(255,255,255,.65);color:var(--ink);font-size:14px;transition:background .25s,color .25s}
+.step-btn .n{display:inline-flex;width:32px;height:32px;border-radius:50%;align-items:center;justify-content:center;background:rgba(15,30,46,.07);font-weight:600;font-size:13px}
+.step-btn[aria-current="step"]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.step-btn[aria-current="step"] .n{background:rgba(255,255,255,.25)}
+.step-body{display:flex;flex-wrap:wrap;gap:28px}
+.step-img{flex:999 1 520px;min-width:0;min-height:440px;transition:background .4s}
+.step-text{flex:1 1 320px;display:flex;flex-direction:column;gap:18px;justify-content:center}
+.step-text .lvl{font-size:13px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+.links-to{display:flex;flex-wrap:wrap;gap:8px}
+.links-to button{min-height:40px;padding:0 14px;border-radius:999px;border:1px dashed rgba(36,89,200,.5);background:rgba(255,255,255,.6);color:var(--accent);font-size:13px}
+.links-to button:hover{background:#fff}
+.step-nav{display:flex;gap:10px;margin-top:6px}
+.round{width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.95);background:rgba(255,255,255,.75);color:var(--ink);display:inline-flex;align-items:center;justify-content:center}
+.round:disabled{opacity:.4;cursor:default}
+.progress{height:4px;border-radius:4px;background:rgba(15,30,46,.08);overflow:hidden}
+.progress i{display:block;height:100%;background:var(--accent);transition:width .4s}
+
+/* connections */
+.zones{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:40px}
+.zone{padding:28px;border-radius:30px;display:flex;flex-direction:column;gap:16px}
+.zone h4{margin:0;font-family:var(--serif);font-weight:400;font-size:30px}
+.zone .sub{font-size:13px;color:var(--muted);margin-top:-10px}
+.zone ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.zone li{padding:12px 16px;border-radius:16px;background:rgba(255,255,255,.7);display:flex;justify-content:space-between;gap:10px;font-size:15px}
+.zone li span:last-child{color:var(--muted);font-size:13px}
+.links-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:16px}
+.link-card{padding:22px 24px;border-radius:24px;display:flex;gap:16px;align-items:flex-start}
+.link-card .icon{flex-shrink:0;width:44px;height:44px;border-radius:14px}
+.link-card b{display:block;font-weight:500}
+.link-card span{font-size:14px;color:var(--muted)}
+
+/* levels */
+.levels{display:flex;flex-wrap:wrap;gap:24px;margin-top:36px}
+.plan{flex:999 1 560px;min-width:0;min-height:520px;align-items:flex-start;flex-direction:column;justify-content:space-between;transition:background .4s}
+.plan-list{flex:1 1 340px;padding:32px;border-radius:36px;display:flex;flex-direction:column;gap:16px}
+.plan-list ol{margin:0;padding:0;list-style:none;display:flex;flex-direction:column}
+.plan-list li{display:flex;gap:14px;align-items:baseline;padding:12px 0;border-top:1px solid var(--hair)}
+.plan-list li .k{font-family:var(--serif);font-size:20px;color:var(--accent);width:24px;flex-shrink:0}
+.plan-list li .a{margin-left:auto;font-size:13px;color:var(--muted);white-space:nowrap}
+
+/* highlights */
+.hl{display:flex;flex-wrap:wrap;gap:24px;margin-top:36px}
+.hl-list{flex:1 1 360px;display:flex;flex-direction:column;gap:8px}
+.hl-item{display:flex;align-items:center;gap:16px;width:100%;text-align:left;padding:16px 20px;border-radius:22px;border:1px solid rgba(255,255,255,.9);background:rgba(255,255,255,.5);color:var(--ink);transition:background .25s,box-shadow .25s}
+.hl-item:hover{background:rgba(255,255,255,.8)}
+.hl-item[aria-pressed="true"]{background:#fff;box-shadow:0 10px 30px rgba(30,60,110,.12)}
+.hl-item .num{font-family:var(--serif);font-size:26px;color:var(--accent);width:32px}
+.hl-item .t{font-size:16px;font-weight:500}
+.hl-item .s{font-size:13px;color:var(--muted)}
+.hl-detail{flex:999 1 560px;min-width:0;border-radius:36px;overflow:hidden;display:flex;flex-direction:column}
+.hl-detail .ph{border-radius:0;min-height:360px;transition:background .4s}
+.hl-detail .body{padding:32px;display:flex;flex-direction:column;gap:16px}
+.facts{display:flex;flex-wrap:wrap;gap:10px}
+.facts span{padding:10px 14px;border-radius:14px;background:rgba(255,255,255,.75);font-size:14px}
+
+/* materials */
+.mats{display:flex;flex-wrap:wrap;gap:24px;align-items:stretch;margin-top:36px}
+.swatches{flex:999 1 560px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.sw{border:0;padding:0;border-radius:24px;overflow:hidden;background:#fff;text-align:left;box-shadow:0 8px 24px rgba(30,60,110,.08);transition:transform .25s,box-shadow .25s;color:var(--ink)}
+.sw:hover{transform:translateY(-3px)}
+.sw[aria-pressed="true"]{box-shadow:0 0 0 3px var(--accent),0 12px 30px rgba(30,60,110,.16)}
+.sw i{display:block;height:110px}
+.sw span{display:block;padding:12px 14px;font-size:14px;font-weight:500}
+.mat-card{flex:1 1 320px;padding:32px;border-radius:32px;display:flex;flex-direction:column;gap:14px}
+
+/* gallery */
+.gal-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:28px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));grid-auto-rows:260px;grid-auto-flow:dense;gap:16px}
+.gallery .ph{border-radius:28px}
+.gallery .big{grid-row:span 2}
+
+/* enquiry */
+.enq{padding:48px;border-radius:44px;display:flex;flex-wrap:wrap;gap:48px}
+.enq>div{flex:1 1 360px}
+.enq form,.thanks{flex:999 1 520px;min-width:0}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label,legend{font-size:13px;color:var(--muted)}
+.field input,.field select{min-height:52px;padding:0 18px;background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.95);border-radius:16px;color:var(--ink);font:inherit}
+fieldset{grid-column:1/-1;margin:0;padding:0;border:0}
+.visit{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.visit .pill{border:1px solid rgba(255,255,255,.95);background:rgba(255,255,255,.75)}
+.visit .pill[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.form-foot{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted);max-width:380px}
+.consent input{margin-top:4px;width:18px;height:18px;accent-color:var(--accent)}
+.thanks{display:none;flex-direction:column;align-items:flex-start;justify-content:center;gap:16px;padding:32px;background:rgba(255,255,255,.7);border-radius:32px;min-height:340px}
+.sent .thanks{display:flex} .sent form{display:none}
+.err{color:#A3261B;font-size:13px;grid-column:1/-1;display:none}
+.show-err .err{display:block}
+@media (max-width:640px){.enq,.journey{padding:24px;border-radius:30px}}
+
+footer .wrap{display:flex;flex-direction:column;gap:22px;padding-bottom:48px}
+.foot-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:center}
+.foot-top nav{display:flex;flex-wrap:wrap;gap:6px 22px;font-size:14px}
+.foot-top nav a{color:var(--ink2);text-decoration:none}
+.legal{font-size:12px;color:var(--muted);border-top:1px solid var(--hair);padding-top:20px;line-height:1.7}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<div class="orbs" aria-hidden="true">
+<div class="orb" aria-hidden="true" style="top:-160px;left:-140px;width:620px;height:620px;background:#B7D3F2;opacity:.85"></div>
+<div class="orb" aria-hidden="true" style="top:1300px;right:-200px;width:700px;height:700px;background:#C9C7F3;opacity:.7"></div>
+<div class="orb" aria-hidden="true" style="top:3000px;left:-220px;width:680px;height:680px;background:#BDE6EA;opacity:.8"></div>
+<div class="orb" aria-hidden="true" style="top:4800px;right:-160px;width:640px;height:640px;background:#B7D3F2;opacity:.75"></div>
+<div class="orb" aria-hidden="true" style="top:6600px;left:25%;width:560px;height:560px;background:#D5D2F5;opacity:.7"></div>
+</div>
+
+<header class="nav">
+  <div class="nav-in glass">
+    <a class="brand" href="#top"><b>[Project Name]</b><small>THE VILLAS</small></a>
+    <nav class="links" aria-label="Primary">
+      <a href="#concept">Concept</a>
+      <a href="#residences">Villas</a>
+      <a href="#journey">The journey</a>
+      <a href="#connections">How it connects</a>
+      <a href="#levels">Floor by floor</a>
+      <a href="#highlights">Design highlights</a>
+    </nav>
+    <a class="btn btn-primary" href="#enquire" style="min-height:44px;padding:0 22px;font-size:14px">Book a private preview</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="wide">
+  <div class="hero">
+    <div class="ph-label"><span class="chip" style="font-size:11px;letter-spacing:.24em;color:var(--label)">HERO FILM · VILLA AT BLUE HOUR · 16:9</span></div>
+    <div class="hero-card glass">
+      <span class="chip">[NUMBER] ARCHITECT-DESIGNED VILLAS · [LOCATION]</span>
+      <h1>A home designed <em>around</em> light, air and family.</h1>
+      <p class="lead" style="font-size:18px">Every villa is planned as a sequence of spaces — from a quiet arrival to an open-to-sky heart, to private suites that open onto their own gardens.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <a class="btn btn-primary" href="#journey">Walk through a villa</a>
+        <a class="btn btn-glass" href="#residences">
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 12h9V3"></path><path d="M12 21v-5h9"></path></svg>
+          Explore the villa types</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONCEPT -->
+<section id="concept" class="wrap section">
+  <div class="concept reveal">
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <span class="eyebrow">01 · The concept</span>
+      <h2>Inward-looking for privacy. <em>Outward-opening</em> for life.</h2>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <p class="lead">[Describe the core design idea in two or three sentences — e.g. each villa wraps around a central open-to-sky courtyard, so every room borrows light and breeze from the centre while the outer walls stay calm and private.]</p>
+      <p class="lead">[One line on the inspiration — climate, regional courtyard houses, modern tropical architecture, the client's way of living.]</p>
+    </div>
+  </div>
+  <div class="principles">
+    <article class="principle glass lift reveal">
+      <span class="icon"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"></rect><rect x="8" y="8" width="8" height="8"></rect></svg></span>
+      <h4>The courtyard heart</h4><p>Rooms are arranged around a central void that brings daylight and cross-ventilation deep into the plan.</p>
+    </article>
+    <article class="principle glass lift reveal">
+      <span class="icon"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 21V9l8-6 8 6v12"></path><path d="M4 13h16"></path></svg></span>
+      <h4>Double-height volumes</h4><p>The living space rises through two levels, connecting family floors visually and filling the home with light.</p>
+    </article>
+    <article class="principle glass lift reveal">
+      <span class="icon"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h18"></path><path d="M3 6h7"></path><path d="M14 18h7"></path></svg></span>
+      <h4>Layered privacy</h4><p>Spaces move from public to family to private as you go deeper and higher into the villa.</p>
+    </article>
+    <article class="principle glass lift reveal">
+      <span class="icon"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22V10"></path><path d="M12 10c0-4 3-7 7-7 0 4-3 7-7 7z"></path><path d="M12 14c0-3-2.5-5.5-6-5.5 0 3 2.5 5.5 6 5.5z"></path></svg></span>
+      <h4>Indoor–outdoor flow</h4><p>Every key room opens onto a deck, verandah, garden or terrace — the landscape becomes part of the house.</p>
+    </article>
+  </div>
+</section>
+
+<!-- RESIDENCES -->
+<section id="residences" class="wrap section">
+  <div class="res-head reveal">
+    <div style="display:flex;flex-direction:column;gap:18px;max-width:620px">
+      <span class="eyebrow">02 · The villas</span>
+      <h2>Three villa signatures. One design language.</h2>
+    </div>
+    <div class="seg glass" role="tablist" aria-label="Villa types" id="villaTabs"></div>
+  </div>
+  <div class="res reveal">
+    <div class="res-img ph" id="villaImg" role="img" aria-label="Villa exterior render placeholder">
+      <div class="top">
+        <div id="villaBadge"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <a class="btn btn-glass" href="#levels" style="min-height:44px;padding:0 16px;font-size:13px">Floor plans</a>
+          <a class="btn btn-glass" href="#journey" style="min-height:44px;padding:0 16px;font-size:13px">Walkthrough</a>
+        </div>
+      </div>
+      <span class="tag" id="villaImgTag">EXTERIOR RENDER</span>
+    </div>
+    <div class="res-card glass" id="villaCard" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section id="journey" class="wide section">
+  <div class="journey glass reveal">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px">
+      <div style="display:flex;flex-direction:column;gap:16px;max-width:640px">
+        <span class="eyebrow">03 · Walk through the villa</span>
+        <h2>From the front door to the rooftop, one continuous experience.</h2>
+      </div>
+      <p class="muted" style="max-width:340px">Step through the spaces in the order you would live them. Tap any space to see how it connects to the next.</p>
+    </div>
+    <div class="steps" id="steps" role="list"></div>
+    <div class="progress" aria-hidden="true"><i id="progress"></i></div>
+    <div class="step-body" style="margin-top:28px">
+      <div class="step-img ph" id="stepImg" role="img" aria-label="Space photograph placeholder"><span class="tag" id="stepImgTag"></span></div>
+      <div class="step-text" id="stepText" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONNECTIONS -->
+<section id="connections" class="wrap section">
+  <div class="reveal" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px">
+    <div style="display:flex;flex-direction:column;gap:18px;max-width:660px">
+      <span class="eyebrow">04 · How the spaces connect</span>
+      <h2>Public, family, private — layered, never separated.</h2>
+    </div>
+    <p class="muted" style="max-width:380px">The plan moves from shared spaces at the front to family spaces at the centre and private suites above — tied together by the courtyard and a single sculptural staircase.</p>
+  </div>
+  <div class="zones">
+    <article class="zone glass lift reveal">
+      <span class="icon"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="8" r="3"></circle><circle cx="17" cy="9" r="2.5"></circle><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"></path><path d="M15 15c3 0 6 1.8 6 5"></path></svg></span>
+      <h4>Welcome</h4><p class="sub">Ground floor · front</p>
+      <ul><li><span>Arrival court &amp; porch</span><span>outdoor</span></li><li><span>Entrance foyer</span><span>threshold</span></li><li><span>Formal living</span><span>double-height</span></li><li><span>Guest suite &amp; powder</span><span>independent</span></li></ul>
+    </article>
+    <article class="zone glass lift reveal">
+      <span class="icon"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 11l9-7 9 7"></path><path d="M5 10v10h14V10"></path><path d="M10 20v-6h4v6"></path></svg></span>
+      <h4>Family</h4><p class="sub">Ground &amp; first floor · centre</p>
+      <ul><li><span>Courtyard &amp; deck</span><span>open to sky</span></li><li><span>Dining &amp; kitchen</span><span>open plan</span></li><li><span>Family lounge</span><span>overlooks living</span></li><li><span>Pooja / study</span><span>quiet corner</span></li></ul>
+    </article>
+    <article class="zone glass lift reveal">
+      <span class="icon"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 18v-6a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v6"></path><path d="M3 18h18"></path><path d="M7 9V6h10v3"></path></svg></span>
+      <h4>Private</h4><p class="sub">First &amp; second floor · rear</p>
+      <ul><li><span>Master suite</span><span>walk-in + garden</span></li><li><span>Bedroom suites</span><span>each en-suite</span></li><li><span>Roof terrace &amp; lounge</span><span>sky views</span></li><li><span>Home theatre</span><span>acoustic</span></li></ul>
+    </article>
+  </div>
+  <div class="links-grid">
+    <div class="link-card glass reveal"><span class="icon"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"></circle><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"></path></svg></span><div><b>Visual links</b><span>Glass walls around the courtyard let the living, dining and kitchen see each other — and the sky.</span></div></div>
+    <div class="link-card glass reveal"><span class="icon"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 20h4v-4h4v-4h4V8h4"></path></svg></span><div><b>Vertical link</b><span>One sculptural staircase beside the light well joins every floor and frames views of the double-height living.</span></div></div>
+    <div class="link-card glass reveal"><span class="icon"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16"></path><path d="M14 6l6 6-6 6"></path></svg></span><div><b>Service link</b><span>A separate staff entry, utility and lift keep service movement invisible from the family spaces.</span></div></div>
+  </div>
+</section>
+
+<!-- LEVELS -->
+<section id="levels" class="wrap section">
+  <div class="reveal" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px">
+    <div style="display:flex;flex-direction:column;gap:18px;max-width:620px">
+      <span class="eyebrow">05 · Floor by floor</span>
+      <h2>How each level is planned — <span id="lvlVilla">The Courtyard</span>.</h2>
+    </div>
+    <div class="seg glass" role="tablist" aria-label="Floors" id="lvlTabs"></div>
+  </div>
+  <div class="levels reveal">
+    <div class="plan ph" id="planImg" role="img" aria-label="Floor plan placeholder">
+      <span class="tag" id="planTag">FLOOR PLAN</span>
+      <span class="muted" style="font-size:14px">Replace with the rendered floor plan for this level.</span>
+    </div>
+    <div class="plan-list glass" id="planList" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- HIGHLIGHTS -->
+<section id="highlights" class="wrap section">
+  <div class="reveal" style="display:flex;flex-direction:column;gap:18px;max-width:700px">
+    <span class="eyebrow">06 · Design highlights</span>
+    <h2>The elements that make these villas unmistakable.</h2>
+  </div>
+  <div class="hl">
+    <div class="hl-list reveal" id="hlList"></div>
+    <article class="hl-detail glass reveal" aria-live="polite">
+      <div class="ph" id="hlImg" role="img" aria-label="Design element photograph placeholder"><span class="tag" id="hlTag"></span></div>
+      <div class="body" id="hlBody"></div>
+    </article>
+  </div>
+</section>
+
+<!-- MATERIALS -->
+<section id="materials" class="wrap section">
+  <div class="reveal" style="display:flex;flex-direction:column;gap:18px;max-width:700px">
+    <span class="eyebrow">07 · Material palette</span>
+    <h2>A calm, natural palette that ages beautifully.</h2>
+  </div>
+  <div class="mats">
+    <div class="swatches reveal" id="swatches"></div>
+    <div class="mat-card glass reveal" id="matCard" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="wide section" aria-labelledby="gal-h">
+  <div class="gal-head reveal">
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <span class="eyebrow">08 · Inside the villas</span>
+      <h2 id="gal-h">Spaces, in detail.</h2>
+    </div>
+    <div class="seg glass" id="galTabs" aria-label="Gallery filter"></div>
+  </div>
+  <div class="gallery" id="gallery"></div>
+</section>
+
+<!-- ENQUIRY -->
+<section id="enquire" class="wide section" style="padding-bottom:120px">
+  <div class="enq glass reveal" id="enq">
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <span class="eyebrow">By appointment</span>
+      <h2 style="font-size:clamp(40px,5vw,66px)">Experience the villa in <em>person</em>.</h2>
+      <p class="lead">Walk through the show villa with our design team, see the materials up close and receive the full floor plans.</p>
+      <div style="display:flex;flex-direction:column;gap:6px;font-size:15px">
+        <a href="tel:+910000000000" style="color:var(--ink);text-decoration:none">+91 [XXXXX XXXXX]</a>
+        <a href="mailto:hello@example.com" style="color:var(--ink);text-decoration:none">[hello@yourdomain.com]</a>
+        <span class="muted">Show villa: [Address] · 10 am – 7 pm</span>
+      </div>
+    </div>
+    <form class="form" id="form" novalidate>
+      <div class="field"><label for="f-name">Full name</label><input id="f-name" type="text" autocomplete="name" required></div>
+      <div class="field"><label for="f-phone">Mobile</label><input id="f-phone" type="tel" autocomplete="tel" required></div>
+      <div class="field"><label for="f-email">Email</label><input id="f-email" type="email" autocomplete="email"></div>
+      <div class="field"><label for="f-type">Villa of interest</label><select id="f-type"><option>The Courtyard</option><option>The Pavilion</option><option>The Estate Villa</option><option>Not sure yet</option></select></div>
+      <fieldset><legend>Preferred visit</legend><div class="visit" id="visit"></div></fieldset>
+      <p class="err" role="alert">Please add your name and mobile number.</p>
+      <div class="form-foot">
+        <label class="consent"><input type="checkbox" id="f-ok"> I agree to be contacted by phone, email or WhatsApp about these villas.</label>
+        <button class="btn btn-primary" type="submit">Request a preview</button>
+      </div>
+    </form>
+    <div class="thanks" role="status">
+      <span class="icon" style="background:var(--accent);color:#fff;border-radius:50%;width:56px;height:56px"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5 9-10"></path></svg></span>
+      <h3>Thank you. We'll be in touch shortly.</h3>
+      <p class="muted" id="thanksMsg"></p>
+      <button class="btn btn-glass" type="button" id="again" style="min-height:44px">Send another request</button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div><div style="font-family:var(--serif);font-size:28px">[Project Name]</div><div class="muted" style="font-size:13px">Villas by [Developer Name] · Architecture by [Studio]</div></div>
+      <nav aria-label="Footer"><a href="#concept">Concept</a><a href="#residences">Villas</a><a href="#journey">Journey</a><a href="#levels">Floor plans</a><a href="#highlights">Highlights</a><a href="#enquire">Enquire</a></nav>
+    </div>
+    <p class="legal">RERA Registration No. [XXXXXXXXXX]. Images are artistic impressions and indicative only. Specifications, plans and finishes are subject to change as per approvals. This page does not constitute an offer or contract.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  /* ---------- data ---------- */
+  var villas = [
+    { name:'The Courtyard', tag:'TYPE A', tone:'#B4CADF', beds:'4 + study', plot:'[XXX] sq.yd.', built:'[X,XXX] sq.ft.', levels:'G + 2', limited:false,
+      line:'Rooms wrap an open-to-sky courtyard, so every space borrows light and breeze from the centre.',
+      feats:['Central courtyard','Home office','Terrace garden'],
+      floors:[
+        {name:'Ground', tone:'#C3D4E6', rooms:[['Arrival porch & foyer','[XX] sq.ft.'],['Double-height living','[XXX] sq.ft.'],['Courtyard & deck','open to sky'],['Dining & kitchen','[XXX] sq.ft.'],['Guest suite','en-suite']]},
+        {name:'First', tone:'#C9D2EA', rooms:[['Family lounge (overlooks living)','[XXX] sq.ft.'],['Master suite + walk-in','[XXX] sq.ft.'],['Bedroom 2 en-suite','[XXX] sq.ft.'],['Study / home office','[XX] sq.ft.']]},
+        {name:'Second', tone:'#BFD6DA', rooms:[['Bedroom 3 en-suite','[XXX] sq.ft.'],['Media room','[XXX] sq.ft.'],['Roof terrace & garden','[XXX] sq.ft.']]}
+      ]},
+    { name:'The Pavilion', tag:'TYPE B', tone:'#BCC6E4', beds:'5', plot:'[XXX] sq.yd.', built:'[X,XXX] sq.ft.', levels:'G + 2 + terrace', limited:false,
+      line:'A double-height living pavilion that opens completely onto the private lawn and deck.',
+      feats:['Double-height pavilion','Lawn-facing deck','Media room'],
+      floors:[
+        {name:'Ground', tone:'#C3D4E6', rooms:[['Foyer & gallery wall','[XX] sq.ft.'],['Living pavilion','[XXX] sq.ft.'],['Dining & show kitchen','[XXX] sq.ft.'],['Wet kitchen & utility','[XX] sq.ft.'],['Guest suite','en-suite']]},
+        {name:'First', tone:'#C9D2EA', rooms:[['Family lounge & bridge','[XXX] sq.ft.'],['Master suite + balcony','[XXX] sq.ft.'],['Bedrooms 2 & 3 en-suite','[XXX] sq.ft.']]},
+        {name:'Second', tone:'#BFD6DA', rooms:[['Bedroom 4 en-suite','[XXX] sq.ft.'],['Media room','[XXX] sq.ft.'],['Gym / yoga deck','[XX] sq.ft.']]},
+        {name:'Terrace', tone:'#CFDCE8', rooms:[['Sky lounge','[XXX] sq.ft.'],['Outdoor kitchen & bar','—'],['Landscaped terrace','[XXX] sq.ft.']]}
+      ]},
+    { name:'The Estate Villa', tag:'SIGNATURE', tone:'#AFCFD4', beds:'5 + staff suite', plot:'[XXX] sq.yd.', built:'[X,XXX] sq.ft.', levels:'G + 3', limited:true,
+      line:'The signature villa: private pool, home lift and the widest frontage onto green.',
+      feats:['Private pool','Home lift','Basement lounge'],
+      floors:[
+        {name:'Basement', tone:'#BAC8DA', rooms:[['Entertainment lounge','[XXX] sq.ft.'],['Wine room','[XX] sq.ft.'],['Parking for [N] cars','—'],['Staff suite','independent']]},
+        {name:'Ground', tone:'#C3D4E6', rooms:[['Arrival court & foyer','[XX] sq.ft.'],['Double-height living','[XXX] sq.ft.'],['Pool deck & cabana','[XXX] sq.ft.'],['Dining, show + wet kitchen','[XXX] sq.ft.'],['Guest suite','en-suite']]},
+        {name:'First', tone:'#C9D2EA', rooms:[['Master wing: suite, lounge, walk-in','[X,XXX] sq.ft.'],['Bedroom 2 en-suite','[XXX] sq.ft.'],['Family lounge','[XXX] sq.ft.']]},
+        {name:'Second', tone:'#BFD6DA', rooms:[['Bedrooms 3 & 4 en-suite','[XXX] sq.ft.'],['Home theatre','[XXX] sq.ft.'],['Roof terrace & garden','[XXX] sq.ft.']]}
+      ]}
+  ];
+
+  var steps = [
+    {t:'Arrival court', lvl:'Ground · outside', tone:'#AFC6DC', d:'A tree-shaded forecourt and a deep porch slow you down before you enter — the first moment of calm.', to:[1]},
+    {t:'Entrance foyer', lvl:'Ground', tone:'#B9C9E0', d:'A compressed, softly lit foyer that opens suddenly into the light of the double-height living — compression, then release.', to:[2,3]},
+    {t:'Double-height living', lvl:'Ground · rises to first', tone:'#C8D2EA', d:'The social heart of the home. Tall glass faces the courtyard, and the family lounge above looks down into it.', to:[3,4,5]},
+    {t:'Open-to-sky courtyard', lvl:'Ground · centre', tone:'#B5D7D9', d:'The light and air source of the villa. Living, dining and staircase all open onto it, so the house always feels connected.', to:[2,4,5]},
+    {t:'Dining & kitchen', lvl:'Ground · rear', tone:'#CFD6E8', d:'An open dining and show kitchen that spills onto the deck, with a separate wet kitchen and service entry behind.', to:[3]},
+    {t:'Staircase & light well', lvl:'Ground → second', tone:'#BCC6E4', d:'A sculptural staircase rises beside a skylit light well — the vertical spine that ties all floors together.', to:[6,7]},
+    {t:'Bedroom suites', lvl:'First & second', tone:'#D4DCEB', d:'Each suite has its own bath, wardrobe and a balcony or garden, set away from the shared spaces for full privacy.', to:[5,7]},
+    {t:'Roof terrace', lvl:'Top level', tone:'#BFD9CF', d:'A sky lounge and terrace garden for evenings and gatherings — the last space in the journey, with the widest view.', to:[5]}
+  ];
+
+  var highlights = [
+    {t:'Open-to-sky courtyard', s:'Light & air at the centre', tone:'#B5D7D9', d:'A planted courtyard sits at the heart of the plan. Floor-to-ceiling glass on three sides brings daylight and cross-breeze into the living, dining and staircase.', f:['[XX] × [XX] ft','Retractable glazing','Rain chain & water feature']},
+    {t:'Double-height living', s:'A volume that connects floors', tone:'#C8D2EA', d:'The living room rises through two levels with a gallery lounge above, so parents and children stay connected across floors.', f:['[XX] ft ceiling','Clerestory windows','Feature wall for art']},
+    {t:'Sculptural staircase', s:'The vertical spine', tone:'#BCC6E4', d:'A floating stair in stone and bronze, wrapped around a skylit light well, links every floor and becomes the villa’s centrepiece.', f:['Cantilevered treads','Skylight above','Bronze balustrade']},
+    {t:'Pool & deck edge', s:'Living that spills outside', tone:'#A9CBDD', d:'The living and dining open fully onto a timber deck and pool, blurring the line between inside and the garden.', f:['[XX] ft lap pool','Sliding-folding doors','Shaded cabana']},
+    {t:'Deep verandahs & screens', s:'Comfort by design', tone:'#BFD6DA', d:'Generous overhangs, verandahs and perforated screens shade the glass, cut heat and add privacy without closing the house.', f:['[X] ft overhangs','Jaali / fluted screens','Passive cooling']},
+    {t:'Private suite gardens', s:'Every bedroom, its own outdoors', tone:'#BFD9CF', d:'Each bedroom suite opens to a private garden, balcony or terrace, so every family member has their own piece of sky.', f:['Garden or balcony per suite','Walk-in wardrobes','Spa-style baths']}
+  ];
+
+  var materials = [
+    {n:'Travertine', c:'#D9CDB8', w:'Living & foyer floors, feature walls', d:'Honed, warm-toned natural stone that keeps floors cool and calm underfoot.'},
+    {n:'Teak wood', c:'#A9805A', w:'Decks, doors, ceiling slats', d:'Weather-tolerant teak brings warmth to the cool, light palette.'},
+    {n:'Lime plaster', c:'#E8E4DC', w:'Interior walls', d:'Breathable, softly textured walls that catch the changing daylight.'},
+    {n:'Brushed bronze', c:'#8E7A5B', w:'Stair balustrade, hardware, fixtures', d:'A quiet metallic accent that patinas gracefully over time.'},
+    {n:'Fluted glass', c:'#C9DCE3', w:'Screens, bath partitions', d:'Lets light through while softening views — privacy without darkness.'},
+    {n:'Basalt stone', c:'#5C6166', w:'Courtyard paving, pool edge', d:'A dark, textured stone that grounds the outdoor spaces.'}
+  ];
+
+  var shots = [
+    {l:'Double-height living', c:'Living', tone:'#C8D2EA', big:true},
+    {l:'Courtyard at dusk', c:'Outdoors', tone:'#B5D7D9', big:false},
+    {l:'Master suite', c:'Suites', tone:'#D4DCEB', big:false},
+    {l:'Pool deck', c:'Outdoors', tone:'#A9CBDD', big:true},
+    {l:'Dining & kitchen', c:'Living', tone:'#CFD6E8', big:false},
+    {l:'Staircase & light well', c:'Living', tone:'#BCC6E4', big:false},
+    {l:'Spa bathroom', c:'Suites', tone:'#C9DCE3', big:false},
+    {l:'Roof terrace', c:'Outdoors', tone:'#BFD9CF', big:false},
+    {l:'Guest suite', c:'Suites', tone:'#CBD5E6', big:false},
+    {l:'Arrival court', c:'Outdoors', tone:'#B9C9E0', big:false}
+  ];
+
+  /* ---------- state ---------- */
+  var st = { villa:0, floor:1, step:0, hl:0, mat:0, cat:'All', visit:'Weekend' };
+
+  /* ---------- villas ---------- */
+  function renderVillas(){
+    $('villaTabs').innerHTML = villas.map(function(v,i){
+      return '<button class="pill" role="tab" aria-selected="'+(st.villa===i)+'" data-v="'+i+'">'+esc(v.name)+'</button>';
+    }).join('');
+    var v = villas[st.villa];
+    $('villaImg').style.background = v.tone;
+    $('villaImgTag').textContent = 'Exterior render · ' + v.tag;
+    $('villaBadge').innerHTML = v.limited ? '<span class="badge">Only [N] villas</span>' : '';
+    $('villaCard').innerHTML =
+      '<div class="fade" style="display:flex;flex-direction:column;gap:20px;height:100%">'+
+      '<span style="font-size:12px;letter-spacing:.22em;color:var(--muted)">'+esc(v.tag)+'</span>'+
+      '<h3 style="font-size:44px;line-height:1.1">'+esc(v.name)+'</h3>'+
+      '<p style="color:var(--ink2)">'+esc(v.line)+'</p>'+
+      '<dl class="specs"><div><dt>Bedrooms</dt><dd>'+esc(v.beds)+'</dd></div><div><dt>Plot</dt><dd>'+esc(v.plot)+'</dd></div><div><dt>Built-up</dt><dd>'+esc(v.built)+'</dd></div><div><dt>Levels</dt><dd>'+esc(v.levels)+'</dd></div></dl>'+
+      '<div class="tags">'+v.feats.map(function(f){return '<span>'+esc(f)+'</span>';}).join('')+'</div>'+
+      '<div style="margin-top:auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding-top:18px;border-top:1px solid var(--hair)">'+
+      '<span class="muted">Price on request</span><a class="btn btn-primary" href="#enquire" style="min-height:44px;padding:0 20px;font-size:14px">Request details</a></div></div>';
+  }
+  $('villaTabs').addEventListener('click', function(e){
+    var b = e.target.closest('[data-v]'); if(!b) return;
+    st.villa = +b.dataset.v; st.floor = Math.min(1, villas[st.villa].floors.length-1);
+    if (villas[st.villa].floors[0].name === 'Basement') st.floor = 1;
+    renderVillas(); renderLevels();
+  });
+
+  /* ---------- journey ---------- */
+  function renderSteps(){
+    $('steps').innerHTML = steps.map(function(s,i){
+      return '<button class="step-btn" role="listitem" data-s="'+i+'"'+(st.step===i?' aria-current="step"':'')+'><span class="n">'+(i+1)+'</span>'+esc(s.t)+'</button>';
+    }).join('');
+    var s = steps[st.step];
+    $('progress').style.width = ((st.step+1)/steps.length*100)+'%';
+    $('stepImg').style.background = s.tone;
+    $('stepImgTag').textContent = s.t + ' · photo / render';
+    $('stepText').innerHTML =
+      '<div class="fade" style="display:flex;flex-direction:column;gap:18px">'+
+      '<span class="lvl">Space '+(st.step+1)+' of '+steps.length+' · '+esc(s.lvl)+'</span>'+
+      '<h3 style="font-size:40px">'+esc(s.t)+'</h3>'+
+      '<p style="color:var(--ink2)">'+esc(s.d)+'</p>'+
+      '<div><div class="muted" style="font-size:13px;margin-bottom:8px">Connects to</div><div class="links-to">'+
+      s.to.map(function(j){return '<button type="button" data-s="'+j+'">'+esc(steps[j].t)+' →</button>';}).join('')+'</div></div>'+
+      '<div class="step-nav"><button class="round" type="button" data-nav="-1" aria-label="Previous space"'+(st.step===0?' disabled':'')+'><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 6l-6 6 6 6"></path></svg></button>'+
+      '<button class="round" type="button" data-nav="1" aria-label="Next space"'+(st.step===steps.length-1?' disabled':'')+'><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 6l6 6-6 6"></path></svg></button></div></div>';
+    var cur = $('steps').querySelector('[aria-current]');
+    if (cur && cur.scrollIntoView && st.touched) { var p=$('steps'); p.scrollTo({left: cur.offsetLeft - p.clientWidth/2 + cur.clientWidth/2, behavior:'smooth'}); }
+  }
+  function goStep(i){ st.touched = true; st.step = Math.max(0, Math.min(steps.length-1, i)); renderSteps(); }
+  $('steps').addEventListener('click', function(e){ var b=e.target.closest('[data-s]'); if(b) goStep(+b.dataset.s); });
+  $('stepText').addEventListener('click', function(e){
+    var b=e.target.closest('[data-s]'); if(b) return goStep(+b.dataset.s);
+    var n=e.target.closest('[data-nav]'); if(n) goStep(st.step + (+n.dataset.nav));
+  });
+
+  /* ---------- levels ---------- */
+  function renderLevels(){
+    var v = villas[st.villa];
+    $('lvlVilla').textContent = v.name;
+    $('lvlTabs').innerHTML = v.floors.map(function(f,i){
+      return '<button class="pill" role="tab" aria-selected="'+(st.floor===i)+'" data-f="'+i+'">'+esc(f.name)+'</button>';
+    }).join('');
+    var f = v.floors[st.floor];
+    $('planImg').style.background = f.tone;
+    $('planTag').textContent = v.name + ' · ' + f.name + ' floor plan';
+    $('planList').innerHTML =
+      '<div class="fade" style="display:flex;flex-direction:column;gap:16px">'+
+      '<span style="font-size:12px;letter-spacing:.22em;color:var(--muted)">'+esc(v.tag)+' · '+esc(f.name.toUpperCase())+' LEVEL</span>'+
+      '<h3>'+esc(f.name)+' floor</h3>'+
+      '<ol>'+f.rooms.map(function(r,i){return '<li><span class="k">'+(i+1)+'</span><span>'+esc(r[0])+'</span><span class="a">'+esc(r[1])+'</span></li>';}).join('')+'</ol></div>';
+  }
+  $('lvlTabs').addEventListener('click', function(e){ var b=e.target.closest('[data-f]'); if(!b) return; st.floor=+b.dataset.f; renderLevels(); });
+
+  /* ---------- highlights ---------- */
+  function renderHl(){
+    $('hlList').innerHTML = highlights.map(function(h,i){
+      return '<button class="hl-item" type="button" aria-pressed="'+(st.hl===i)+'" data-h="'+i+'"><span class="num">'+(i+1)+'</span><span><span class="t" style="display:block">'+esc(h.t)+'</span><span class="s">'+esc(h.s)+'</span></span></button>';
+    }).join('');
+    var h = highlights[st.hl];
+    $('hlImg').style.background = h.tone;
+    $('hlTag').textContent = h.t + ' · photo / render';
+    $('hlBody').innerHTML = '<div class="fade" style="display:flex;flex-direction:column;gap:16px"><h3>'+esc(h.t)+'</h3><p style="color:var(--ink2)">'+esc(h.d)+'</p><div class="facts">'+h.f.map(function(x){return '<span>'+esc(x)+'</span>';}).join('')+'</div></div>';
+  }
+  $('hlList').addEventListener('click', function(e){ var b=e.target.closest('[data-h]'); if(!b) return; st.hl=+b.dataset.h; renderHl(); });
+
+  /* ---------- materials ---------- */
+  function renderMats(){
+    $('swatches').innerHTML = materials.map(function(m,i){
+      return '<button class="sw" type="button" aria-pressed="'+(st.mat===i)+'" data-m="'+i+'"><i style="background:'+m.c+'"></i><span>'+esc(m.n)+'</span></button>';
+    }).join('');
+    var m = materials[st.mat];
+    $('matCard').innerHTML = '<div class="fade" style="display:flex;flex-direction:column;gap:14px"><span style="display:block;width:64px;height:64px;border-radius:18px;background:'+m.c+';box-shadow:inset 0 1px 0 rgba(255,255,255,.4)"></span><h3>'+esc(m.n)+'</h3><p style="color:var(--ink2)">'+esc(m.d)+'</p><div><div class="muted" style="font-size:13px">Where it’s used</div><div style="font-weight:500">'+esc(m.w)+'</div></div></div>';
+  }
+  $('swatches').addEventListener('click', function(e){ var b=e.target.closest('[data-m]'); if(!b) return; st.mat=+b.dataset.m; renderMats(); });
+
+  /* ---------- gallery ---------- */
+  function renderGal(){
+    $('galTabs').innerHTML = ['All','Living','Suites','Outdoors'].map(function(c){
+      return '<button class="pill" type="button" aria-pressed="'+(st.cat===c)+'" data-c="'+c+'">'+c+'</button>';
+    }).join('');
+    $('gallery').innerHTML = shots.filter(function(s){return st.cat==='All'||s.c===st.cat;}).map(function(s){
+      return '<div class="ph lift fade'+(s.big&&st.cat==='All'?' big':'')+'" role="img" aria-label="'+esc(s.l)+' placeholder" style="background:'+s.tone+'"><span class="tag">'+esc(s.l)+'</span></div>';
+    }).join('');
+  }
+  $('galTabs').addEventListener('click', function(e){ var b=e.target.closest('[data-c]'); if(!b) return; st.cat=b.dataset.c; renderGal(); });
+
+  /* ---------- enquiry ---------- */
+  function renderVisit(){
+    $('visit').innerHTML = ['Weekday','Weekend','Video walkthrough'].map(function(v){
+      return '<button class="pill" type="button" aria-pressed="'+(st.visit===v)+'" data-vi="'+v+'">'+v+'</button>';
+    }).join('');
+  }
+  $('visit').addEventListener('click', function(e){ var b=e.target.closest('[data-vi]'); if(!b) return; st.visit=b.dataset.vi; renderVisit(); });
+  $('form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var ok = $('f-name').value.trim() && $('f-phone').value.trim();
+    $('form').classList.toggle('show-err', !ok);
+    if(!ok) return;
+    $('thanksMsg').textContent = 'A relationship manager will call to confirm your ' + st.visit.toLowerCase() + ' visit for ' + $('f-type').value + '.';
+    $('enq').classList.add('sent');
+  });
+  $('again').addEventListener('click', function(){ $('enq').classList.remove('sent'); $('form').reset(); });
+
+  /* ---------- reveal on scroll ---------- */
+  var els = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){ es.forEach(function(x){ if(x.isIntersecting){ x.target.classList.add('in'); io.unobserve(x.target);} }); }, {threshold:.12});
+    els.forEach(function(el){ io.observe(el); });
+  } else { els.forEach(function(el){ el.classList.add('in'); }); }
+
+  renderVillas(); renderSteps(); renderLevels(); renderHl(); renderMats(); renderGal(); renderVisit();
+})();
+</script>
+</body>
+</html>
